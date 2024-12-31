@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_GUID: 7af10bad9c929f343a65e33b012ade5a
+  m_SerializeEntries:
+  - m_GUID: 085b10efc7d94464db5edd5196800535
+    m_Address: Assets/Raw/Prefabs/Cubes/BlueCube.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - cube
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4cf09d9c68905e044a6bad24a060f6a5
+    m_Address: Assets/Raw/Prefabs/Cubes/RedCube.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - cube
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 59287f2e08bee2b4190c07a2216665ff
+    m_Address: Assets/Raw/Prefabs/Spheres/Sphere.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - sphere
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc738563c43f73448a7ff22614d1cd92
+    m_Address: Assets/Raw/Prefabs/Cubes/GreenCube.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - cube
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 80d39333fbbef9e4fa27c496246fb17a, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: c2baf3903bc290d49b5749a8f576eef6, type: 2}
+    - {fileID: 11400000, guid: 096ee36894c38114d8d58061a37ba9e2, type: 2}
