@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -17,6 +19,7 @@ namespace Test
         private void Start()
         {
             _ComponentReference = new ComponentReference<GameObject>(_AssetReference.RuntimeKey.ToString());
+            StartCoroutine(Test());
         }
 
         private void Update()
@@ -56,6 +59,44 @@ namespace Test
             if (Input.GetKeyDown(KeyCode.P))
             {
                 Debug.LogError(AddressablesUtility.GetAddressFromAssetReference(_AssetReference));
+            }
+        }
+
+        private Dictionary<string,GameObject> _PreloadedObjects = new Dictionary<string, GameObject>();
+        IEnumerator Test()
+        {
+            // var opHandle = Addressables.LoadResourceLocationsAsync(_AssetReference);
+            // yield return opHandle;
+            //
+            // Debug.LogError(opHandle.Result[0].PrimaryKey);
+
+            var loadResourceLocationHandle = Addressables.LoadResourceLocationsAsync("cube", typeof(GameObject));
+            if (!loadResourceLocationHandle.IsDone)
+                yield return loadResourceLocationHandle;
+            
+            var opList = new List<AsyncOperationHandle>(loadResourceLocationHandle.Result.Count);
+            
+            foreach (var location in loadResourceLocationHandle.Result)
+            {
+                AsyncOperationHandle<GameObject> loadAssetHandle = Addressables.LoadAssetAsync<GameObject>(location);
+                loadAssetHandle.Completed += obj =>
+                {
+                    _PreloadedObjects.Add(location.PrimaryKey, obj.Result);
+                };
+                opList.Add(loadAssetHandle);
+            }
+            
+            var groupOp = Addressables.ResourceManager.CreateGenericGroupOperation(opList);
+            if (!groupOp.IsDone)
+            {
+                yield return groupOp;
+            }
+            
+            loadResourceLocationHandle.Release();
+            
+            foreach (var item in _PreloadedObjects)
+            {
+                Debug.LogError(item.Key + " " +item.Value.name);
             }
         }
     }

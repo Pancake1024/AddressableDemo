@@ -1,0 +1,26 @@
+﻿using System;
+using UnityEngine;
+
+namespace Party
+{
+    public interface IAssetManager
+    {
+        void InstantiateAsync(string path, Action<GameObject> callback, Transform parent = null,
+            bool worldPositionStays = true);
+
+        void InstantiateAsync(string path, Action<GameObject> callback, Vector3 position,
+            Quaternion rotation, Transform parent = null);
+
+        void LoadSpriteAsync(string path, Action<Sprite> callback);
+        
+        void LoadTexture2DAsync(string path, Action<Texture2D> callback);
+        
+        void LoadMaterialAsync(string path, Action<Material> callback);
+        
+        void LoadMeshAsync(string path, Action<Mesh> callback);
+        
+        void ReleaseAsset(string path);
+        
+        void ReleaseAll();
+    }
+}

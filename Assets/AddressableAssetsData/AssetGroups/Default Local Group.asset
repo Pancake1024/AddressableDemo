@@ -15,29 +15,56 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 7af10bad9c929f343a65e33b012ade5a
   m_SerializeEntries:
-  - m_GUID: 085b10efc7d94464db5edd5196800535
-    m_Address: Assets/Raw/Prefabs/Cubes/BlueCube.prefab
+  - m_GUID: 02bb7a60b257a234786f4f5afbfd2dc4
+    m_Address: Assets/Raw/Mesh/animal_clock_001_LOD1.mesh
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - cube
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4cf09d9c68905e044a6bad24a060f6a5
-    m_Address: Assets/Raw/Prefabs/Cubes/RedCube.prefab
+  - m_GUID: 03525e7407a85864d8e4e2ce72cec886
+    m_Address: Assets/Raw/Scenes/AddressTestScene.unity
     m_ReadOnly: 0
     m_SerializedLabels:
-    - cube
+    - scene
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 59287f2e08bee2b4190c07a2216665ff
-    m_Address: Assets/Raw/Prefabs/Spheres/Sphere.prefab
+  - m_GUID: 0edecdcdcd4d2c646928dbbc0d179014
+    m_Address: Assets/Raw/UI/RawImage1.png
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - sphere
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fc738563c43f73448a7ff22614d1cd92
-    m_Address: Assets/Raw/Prefabs/Cubes/GreenCube.prefab
+  - m_GUID: 13fd0859a9d5a4a43bc437edf31c0fd7
+    m_Address: Assets/Raw/Mesh/animal_doublebed_001_LOD2.mesh
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - cube
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 244d5830a5525c142946e395adfe12c1
+    m_Address: Assets/Raw/Mesh/animal_clock_001_LOD2.mesh
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 60d0829f7741aa347bad81171a9b0e23
+    m_Address: Assets/Raw/UI/image1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 753a15ac0354916478f132407f7c3186
+    m_Address: Assets/Raw/Mesh/animal_doublebed_001_LOD1.mesh
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c7ffe828dccefa4d935d35912d0f942
+    m_Address: Assets/Raw/Mesh/animal_doublebed_001_LOD0.mesh
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f8f675831937824a9577c9f28148530
+    m_Address: Assets/Raw/UI/RawImage2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eb228eb22789bd244bed3507b7b4e26d
+    m_Address: Assets/Raw/UI/image2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 80d39333fbbef9e4fa27c496246fb17a, type: 2}

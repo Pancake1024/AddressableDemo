@@ -8,7 +8,7 @@ namespace Test
 {
     public class LoadByLabel : MonoBehaviour
     {
-        [FormerlySerializedAs("_Lables")] public List<string> _Keys = new List<string>(){"cube"};
+        public List<string> _Keys = new List<string>(){"cube"};
         private AsyncOperationHandle<IList<GameObject>> _Handle;
         private List<GameObject> _Objects = new List<GameObject>();
 

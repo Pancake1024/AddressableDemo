@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 7af10bad9c929f343a65e33b012ade5a
   m_currentHash:
     serializedVersion: 2
-    Hash: d4bd48f04b96102b7997f88798c6df1f
+    Hash: 0e2fd34b052de541d689f6c9738225bf
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 1
   m_CatalogRequestsTimeout: 0
@@ -53,12 +53,13 @@ MonoBehaviour:
     m_Id: 3bbeb58b6f4590f4da226c749a46626e
   m_RemoteCatalogLoadPath:
     m_Id: 464b5211d7bb7c2469bdcf904ad5d521
-  m_ContentStateBuildPathProfileVariableName: Remote.BuildPath
+  m_ContentStateBuildPathProfileVariableName: <default settings path>
   m_CustomContentStateBuildPath: 
   m_ContentStateBuildPath: 
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
   m_GroupAssets:
+  - {fileID: 11400000, guid: 4e3f052b744c7ba4099dd58e6b70b35c, type: 2}
   - {fileID: 11400000, guid: 3c8d128ae2f72744ab3e946cb298c024, type: 2}
   m_BuildSettings:
     m_LogResourceManagerExceptions: 1
@@ -114,6 +115,7 @@ MonoBehaviour:
     m_LabelNames:
     - cube
     - sphere
+    - scene
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: f7c5105710fbbb244aad04fbe8fdd778, type: 2}
