@@ -234,6 +234,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "io.unity3d.source.pool": {
+      "version": "https://github.com/kakashiio/Unity-Pool.git#1.0.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "9617a267b887ce12f20e6d5cb43ac60b380e72e6"
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,

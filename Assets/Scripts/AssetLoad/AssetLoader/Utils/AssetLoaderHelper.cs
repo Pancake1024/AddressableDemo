@@ -10,11 +10,19 @@ namespace Party
         private static List<IAssetLoader> _PendingAssetLoader = new List<IAssetLoader>();
         private static List<IAssetLoader> _CreatedAssetLoader = new List<IAssetLoader>(2);
         
-        public static List<IAssetLoader> PendingAssetLoader => _PendingAssetLoader;
+        private static AssetLoaderFactory _AssetLoaderFactory = new AssetLoaderFactory();
+        private static List<LoaderWrapperData> _LoaderWrapperDatas = new List<LoaderWrapperData>();
 
+        private static CSharpClassPool<LoaderWrapperData> _LoaderWrapperDataPool =
+            CSharpClassPool<LoaderWrapperData>.Build(10, 20, () => new LoaderWrapperData(), data => data.Release(),
+                data => data.Release(), data => data.Release());
+        
+        public static List<IAssetLoader> PendingAssetLoader => _PendingAssetLoader;
+        public static AssetLoaderFactory AssetLoaderFactory => _AssetLoaderFactory;
+        
         public static void AddLoaderWrapper(ILoaderWrapper loaderWrapper,Action<Object> callBack)
         {
-            AssetLoaderFactory.CreateAssetLoader(loaderWrapper, AssetManager.Instance, callBack, _CreatedAssetLoader);
+            _AssetLoaderFactory.CreateAssetLoader(loaderWrapper, AssetManager.Instance, callBack, _CreatedAssetLoader);
             
             _CreatedAssetLoader.Sort((a, b) => a.Priority.CompareTo(b.Priority));
 
@@ -33,6 +41,23 @@ namespace Party
             }
             
             _CreatedAssetLoader.Clear();
+        }
+
+        public static void Update()
+        {
+               
+        }
+        
+        public class LoaderWrapperData
+        {
+            public ILoaderWrapper LoaderWrapper;
+            public Action<Object> CallBack;
+
+            public void Release()
+            {
+                LoaderWrapper = null;
+                CallBack = null;
+            }
         }
     }
 }

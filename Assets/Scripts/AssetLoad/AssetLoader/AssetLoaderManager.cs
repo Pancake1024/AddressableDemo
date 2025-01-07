@@ -37,6 +37,8 @@ namespace Party
             }
 
             if (!_CanUpdate) return;
+            
+            AssetLoaderHelper.Update();
 
             if (_Time > _UpdateLoaderTime)
             {
@@ -64,8 +66,8 @@ namespace Party
                 {
                     // Debug.LogError($"loader done:{loader.GetType().Name} {loader.Priority}");
                     _AssetLoaders.RemoveAt(i);
-                    //TODO:Pool
                     loader.Release();
+                    AssetLoaderHelper.AssetLoaderFactory.ReturnLoader(loader);
                     i--;
                 }
             }
