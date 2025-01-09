@@ -25,26 +25,6 @@ namespace Party
         public static void AddLoaderWrapper(ILoaderWrapper loaderWrapper,Action<Object> callBack)
         {
             _LoaderWrapperDatas.Add(_LoaderWrapperDataPool.Borrow().Init(loaderWrapper, callBack));
-            
-            // _AssetLoaderFactory.CreateAssetLoader(loaderWrapper, AssetManager.Instance, callBack, _CreatedAssetLoader);
-            //
-            // _CreatedAssetLoader.Sort((a, b) => a.Priority.CompareTo(b.Priority));
-            //
-            // for (int j = 0; j < _CreatedAssetLoader.Count; j++)
-            // {
-            //     var loader = _CreatedAssetLoader[j];
-            //     int insertIndex = _PendingAssetLoader.FindLastIndex(x => x.Priority <= loader.Priority);
-            //     if (insertIndex == -1)
-            //     {
-            //         _PendingAssetLoader.Insert(0, loader);
-            //     }
-            //     else
-            //     {
-            //         _PendingAssetLoader.Insert(insertIndex + 1, loader);
-            //     }
-            // }
-            //
-            // _CreatedAssetLoader.Clear();
         }
 
         public static void Update(int maxCount)
