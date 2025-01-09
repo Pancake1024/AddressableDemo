@@ -38,7 +38,7 @@ namespace Party
 
             if (!_CanUpdate) return;
             
-            AssetLoaderHelper.Update();
+            AssetLoaderHelper.Update(PARALLEL_MAX_LOADERS_COUNT);
 
             if (_Time > _UpdateLoaderTime)
             {

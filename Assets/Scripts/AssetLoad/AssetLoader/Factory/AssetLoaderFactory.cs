@@ -27,7 +27,7 @@ namespace Party
             _Tex2DAssetLoaderPool = CSharpClassPool<Texture2DAssetLoader>.Build(POOL_MIN_SIZE,POOL_MAX_SIZE, () => new Texture2DAssetLoader(), loader=>loader.Release(), loader=>loader.Release(),loader=>loader.Release());
         }
         
-        public IAssetLoader[] CreateAssetLoader(ILoaderWrapper loaderWrapper,IAssetManager assetManager,Action<Object> callBack,List<IAssetLoader> assetLoaders)
+        public void CreateAssetLoader(ILoaderWrapper loaderWrapper,IAssetManager assetManager,Action<Object> callBack,List<IAssetLoader> assetLoaders)
         {
             if (loaderWrapper is ImageLoaderWrapper)
             {
@@ -42,9 +42,15 @@ namespace Party
             {
                 assetLoaders.Add(_MeshAssetLoaderPool.Borrow().InitLoader(_GenerateAssetPath(loaderWrapper.Path,"1"), loaderWrapper.Priority, assetManager, callBack));
                 assetLoaders.Add(_MeshAssetLoaderPool.Borrow().InitLoader(_GenerateAssetPath(loaderWrapper.Path,"2"),loaderWrapper.Priority+1, assetManager, callBack));
+            }else if (loaderWrapper is GameObjectLoaderWrapper)
+            {
+                assetLoaders.Add(_GameObjectLoaderPool.Borrow().InitLoader(_GenerateAssetPath(loaderWrapper.Path,"1"), loaderWrapper.Priority, assetManager, callBack));
+                assetLoaders.Add(_GameObjectLoaderPool.Borrow().InitLoader(_GenerateAssetPath(loaderWrapper.Path,"2"),loaderWrapper.Priority+1, assetManager, callBack));
             }
-            
-            return assetLoaders.ToArray();
+            else
+            {
+                Debug.LogError($"CreateAssetLoader error:{loaderWrapper.GetType().Name}");
+            }
         }
 
         public void ReturnLoader(IAssetLoader loader)

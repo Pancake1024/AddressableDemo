@@ -36,6 +36,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 193a16340a4c5d54c9043b958659bedb
+    m_Address: Assets/Raw/Prefabs/Effects/effect_02.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 226b0706e534897469b783be37c56520
+    m_Address: Assets/Raw/Prefabs/Effects/effect_01.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 244d5830a5525c142946e395adfe12c1
     m_Address: Assets/Raw/Mesh/animal_clock_001_LOD2.mesh
     m_ReadOnly: 0
@@ -53,6 +63,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7c7ffe828dccefa4d935d35912d0f942
     m_Address: Assets/Raw/Mesh/animal_doublebed_001_LOD0.mesh
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8aa1deae45bf5f0458adfb657f3658aa
+    m_Address: Assets/Raw/SVC.shadervariants
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

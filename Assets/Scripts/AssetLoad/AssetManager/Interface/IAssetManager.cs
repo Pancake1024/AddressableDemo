@@ -1,5 +1,7 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine.SceneManagement;
 
 namespace Party
 {
@@ -18,6 +20,11 @@ namespace Party
         void LoadMaterialAsync(string path, Action<Material> callback);
         
         void LoadMeshAsync(string path, Action<Mesh> callback);
+
+        void LoadShaderVariants(string path, Action<ShaderVariantCollection> callback);
+
+        void LoadScene(string path, LoadSceneMode loadMode = LoadSceneMode.Single, bool activateOnLoad = true,
+            int priority = 100, SceneReleaseMode releaseMode = SceneReleaseMode.ReleaseSceneWhenSceneUnloaded);
         
         void ReleaseAsset(string path);
         

@@ -1,4 +1,6 @@
-﻿namespace Party
+﻿using UnityEngine;
+
+namespace Party
 {
     public class GameObjectLoader : AbstractAssetLoader
     {

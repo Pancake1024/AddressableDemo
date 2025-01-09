@@ -25,7 +25,8 @@ namespace Party
                     _LoadedGameObject = null;
                 }
                 
-                var go = Instantiate(obj as GameObject, Parent, false);
+                var go = obj as GameObject;
+                go.transform.SetParent(Parent);
                 go.transform.localPosition = Vector3.zero;
                 go.transform.localRotation = Quaternion.identity;
                 go.transform.localScale = Vector3.one;

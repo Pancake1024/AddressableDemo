@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 namespace Party
@@ -67,6 +69,7 @@ namespace Party
                 }
             };
         }
+        
         public void InstantiateAsync(string path, Action<GameObject> callback,Transform parent = null,bool worldPositionStays = true)
         {
             _LoadAssetAsync<GameObject>(path, obj =>
@@ -117,6 +120,17 @@ namespace Party
         public void LoadMeshAsync(string path, Action<Mesh> callback)
         {
             _LoadAssetAsync<Mesh>(path, callback);
+        }
+
+        public void LoadShaderVariants(string path, Action<ShaderVariantCollection> callback)
+        {
+            _LoadAssetAsync<ShaderVariantCollection>(path, callback);
+        }
+
+        public void LoadScene(string path, LoadSceneMode loadMode = LoadSceneMode.Single, bool activateOnLoad = true,
+            int priority = 100, SceneReleaseMode releaseMode = SceneReleaseMode.ReleaseSceneWhenSceneUnloaded)
+        {
+            Addressables.LoadSceneAsync(path, loadMode, activateOnLoad, priority, releaseMode);
         }
 
         public void ReleaseAsset(string path)
