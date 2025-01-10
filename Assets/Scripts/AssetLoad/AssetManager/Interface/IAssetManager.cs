@@ -29,5 +29,9 @@ namespace Party
         void ReleaseAsset(string path);
         
         void ReleaseAll();
+
+        void GetDownloadSizeAsync(string path, Action<long> callback);
+        
+        AssetLoadStatus GetAssetLoadStatus(string path);
     }
 }

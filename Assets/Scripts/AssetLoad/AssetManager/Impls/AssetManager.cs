@@ -9,10 +9,16 @@ using Object = UnityEngine.Object;
 
 namespace Party
 {
-    public class AssetManager : Singleton<AssetManager>, IAssetManager
+    /// <summary>
+    /// 使用Addressables对IAssetManager接口的实现
+    /// </summary>
+    public class AssetManager : IAssetManager
     {
-        private Dictionary<string, AsyncOperationHandle> _Path2Handle = new Dictionary<string, AsyncOperationHandle>();
-        private Dictionary<string, List<Action<object>>> _Path2PendingCallbacks = new Dictionary<string, List<Action<object>>>();
+        private const int INIT_CAPACITY = 128;
+        
+        private Dictionary<string, AsyncOperationHandle> _Path2Handle = new Dictionary<string, AsyncOperationHandle>(INIT_CAPACITY);
+        private Dictionary<string, List<Action<object>>> _Path2PendingCallbacks = new Dictionary<string, List<Action<object>>>(INIT_CAPACITY);
+        private Dictionary<string,AssetLoadStatus> _Asset2LoadStatus = new Dictionary<string, AssetLoadStatus>(INIT_CAPACITY);
         
         private void _LoadAssetAsync<T>(string path, Action<T> callback) where T : Object
         {
@@ -36,6 +42,11 @@ namespace Party
                 }
                 return;
             }
+
+            if (!_Asset2LoadStatus.ContainsKey(path))
+            {
+                _Asset2LoadStatus.Add(path, AssetLoadStatus.Loading);
+            }
             
             var newOpHandle = Addressables.LoadAssetAsync<T>(path);
             _Path2Handle.Add(path, newOpHandle);
@@ -44,6 +55,7 @@ namespace Party
                 if (handle.Status == AsyncOperationStatus.Succeeded)
                 {
                     callback?.Invoke(handle.Result);
+                    _Asset2LoadStatus[path] = AssetLoadStatus.Loaded;
 
                     if (_Path2PendingCallbacks.ContainsKey(path))
                     {
@@ -58,6 +70,7 @@ namespace Party
                 {
                     Debug.LogError($"Load {path} failed");
                     callback?.Invoke(default);
+                    _Asset2LoadStatus[path] = AssetLoadStatus.Failed;
                     if (_Path2PendingCallbacks.ContainsKey(path))
                     {
                         foreach (var cb in _Path2PendingCallbacks[path])
@@ -137,7 +150,11 @@ namespace Party
         {
             if (_Path2Handle.ContainsKey(path))
             {
-                _Path2Handle[path].Release();
+                var handle = (AsyncOperationHandle)_Path2Handle[path];
+                if (handle.IsValid())
+                {
+                    handle.Release();
+                }
                 _Path2Handle.Remove(path);
             }
         }
@@ -151,6 +168,25 @@ namespace Party
 
             _Path2Handle.Clear();
             _Path2PendingCallbacks.Clear();
+        }
+
+        public void GetDownloadSizeAsync(string path, Action<long> callback)
+        {
+            Addressables.GetDownloadSizeAsync(path).Completed += opHandle =>
+            {
+                callback?.Invoke(opHandle.Result);
+                opHandle.Release();
+            };
+        }
+
+        public AssetLoadStatus GetAssetLoadStatus(string path)
+        {
+            if (_Asset2LoadStatus.ContainsKey(path))
+            {
+                return _Asset2LoadStatus[path];
+            }
+            
+            return AssetLoadStatus.None;
         }
     }
 }

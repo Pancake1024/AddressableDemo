@@ -13,7 +13,7 @@ namespace Party
 
         protected override void LoadAssetAsync(string path)
         {
-            AssetLoaderHelper.AddLoaderWrapper(this, obj =>
+            AssetLoaderManager.Instance.AddLoaderWrapper(this, obj =>
             {
                 if (MeshFilter != null)
                 {

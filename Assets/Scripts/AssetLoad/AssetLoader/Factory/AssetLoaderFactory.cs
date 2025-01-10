@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Party
 {
@@ -27,29 +25,35 @@ namespace Party
             _Tex2DAssetLoaderPool = CSharpClassPool<Texture2DAssetLoader>.Build(POOL_MIN_SIZE,POOL_MAX_SIZE, () => new Texture2DAssetLoader(), loader=>loader.Release(), loader=>loader.Release(),loader=>loader.Release());
         }
         
-        public void CreateAssetLoader(ILoaderWrapper loaderWrapper,IAssetManager assetManager,Action<Object> callBack,List<IAssetLoader> assetLoaders)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loaderWrapper"></param>
+        /// <param name="assetManager"></param>
+        /// <param name="callBack"></param>
+        /// <param name="assetLoaders"></param>
+        public IAssetLoader CreateAssetLoader(LoaderData data,IAssetManager assetManager)
         {
-            if (loaderWrapper is ImageLoaderWrapper)
+            //TODO:如果资源精度最高的已经下载了，那么就不需要再下载低精度的资源
+            //TODO:使用assetManager.GetAssetLoadStatus()方法来查询资源的加载状态
+            if (data.LoaderWrapper is ImageLoaderWrapper)
             {
-                assetLoaders.Add(_ImageAssetLoaderPool.Borrow().InitLoader(_GenerateAssetPath(loaderWrapper.Path,"1"), loaderWrapper.Priority, assetManager, callBack));
-                assetLoaders.Add(_ImageAssetLoaderPool.Borrow().InitLoader(_GenerateAssetPath(loaderWrapper.Path,"2"),loaderWrapper.Priority+1, assetManager, callBack));
+                return _ImageAssetLoaderPool.Borrow().InitLoader(data.Path, data.Priority, assetManager, data.CallBack);
             }
-            else if (loaderWrapper is RawImageLoaderWrapper)
+            else if (data.LoaderWrapper is RawImageLoaderWrapper)
             {
-                assetLoaders.Add(_RawImageAssetLoaderPool.Borrow().InitLoader(_GenerateAssetPath(loaderWrapper.Path,"1"), loaderWrapper.Priority, assetManager, callBack));
-                assetLoaders.Add(_RawImageAssetLoaderPool.Borrow().InitLoader(_GenerateAssetPath(loaderWrapper.Path,"2"),loaderWrapper.Priority+1, assetManager, callBack));
-            }else if (loaderWrapper is MeshLoaderWrapper)
+                return _RawImageAssetLoaderPool.Borrow().InitLoader(data.Path, data.Priority, assetManager, data.CallBack);
+            }else if (data.LoaderWrapper is MeshLoaderWrapper)
             {
-                assetLoaders.Add(_MeshAssetLoaderPool.Borrow().InitLoader(_GenerateAssetPath(loaderWrapper.Path,"1"), loaderWrapper.Priority, assetManager, callBack));
-                assetLoaders.Add(_MeshAssetLoaderPool.Borrow().InitLoader(_GenerateAssetPath(loaderWrapper.Path,"2"),loaderWrapper.Priority+1, assetManager, callBack));
-            }else if (loaderWrapper is GameObjectLoaderWrapper)
+                return  _MeshAssetLoaderPool.Borrow().InitLoader(data.Path, data.Priority, assetManager, data.CallBack);
+            }else if (data.LoaderWrapper is GameObjectLoaderWrapper)
             {
-                assetLoaders.Add(_GameObjectLoaderPool.Borrow().InitLoader(_GenerateAssetPath(loaderWrapper.Path,"1"), loaderWrapper.Priority, assetManager, callBack));
-                assetLoaders.Add(_GameObjectLoaderPool.Borrow().InitLoader(_GenerateAssetPath(loaderWrapper.Path,"2"),loaderWrapper.Priority+1, assetManager, callBack));
+                return _GameObjectLoaderPool.Borrow().InitLoader(data.Path, data.Priority, assetManager, data.CallBack);
             }
             else
             {
-                Debug.LogError($"CreateAssetLoader error:{loaderWrapper.GetType().Name}");
+                Debug.LogError($"CreateAssetLoader error:{data.LoaderWrapper.GetType().Name}");
+                return null;
             }
         }
 
