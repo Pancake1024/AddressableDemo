@@ -3,12 +3,20 @@ using Object = UnityEngine.Object;
 
 namespace Party
 {
-    public enum AssetLoadStatus
+    public enum LoaderStatus
     {
         None,
         Loading,
         Loaded,
         Failed,
+    }
+
+    public enum AssetStatus
+    {
+        None,
+        Loading,
+        Loaded,
+        Release,
     }
     
     public class LoaderData
@@ -35,5 +43,14 @@ namespace Party
             CallBack = null;
         }
     }
-
+        
+    public class AssetPath
+    {
+        public string DefaultPath;
+        public AssetStatus DefaultAssetStatus;
+        public string MinPath;
+        public AssetStatus MinAssetStatus;
+        public string MaxPath;
+        public AssetStatus MaxAssetStatus;
+    }
 }

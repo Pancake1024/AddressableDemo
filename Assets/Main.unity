@@ -278,7 +278,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a316564fbd104e03a64f5eb3f2b724d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PARALLEL_MAX_LOADERS_COUNT: 5
+  _AssetAutoReleaseInterval: 2
+  _OpenAutoRelease: 1
+  PARALLEL_MAX_LOADERS_COUNT: 1
+  _OpenUpdate: 0
   _UpdateLoaderTime: 0.2
 --- !u!4 &8480962
 Transform:

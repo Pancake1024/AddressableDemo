@@ -51,6 +51,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 51c10c0f8249c2448beadd30805c738b
+    m_Address: Assets/Raw/Prefabs/Effects/effect_0.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 60d0829f7741aa347bad81171a9b0e23
     m_Address: Assets/Raw/UI/image1.png
     m_ReadOnly: 0
@@ -62,7 +67,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7c7ffe828dccefa4d935d35912d0f942
-    m_Address: Assets/Raw/Mesh/animal_doublebed_001_LOD0.mesh
+    m_Address: Assets/Raw/Mesh/animal_doublebed_001_LOD.mesh
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -73,6 +78,21 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8f8f675831937824a9577c9f28148530
     m_Address: Assets/Raw/UI/RawImage2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ae1ba6e223d7a8842be2d61d088733ae
+    m_Address: Assets/Raw/UI/image.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d074552d1e2c6e44196b77e1bcf5ad2c
+    m_Address: Assets/Raw/UI/RawImage.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d6403c6ce1993a242a82d37d031e2018
+    m_Address: Assets/Raw/Mesh/animal_clock_001_LOD.mesh
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

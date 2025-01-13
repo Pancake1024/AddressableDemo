@@ -18,7 +18,7 @@ namespace Party
         
         private Dictionary<string, AsyncOperationHandle> _Path2Handle = new Dictionary<string, AsyncOperationHandle>(INIT_CAPACITY);
         private Dictionary<string, List<Action<object>>> _Path2PendingCallbacks = new Dictionary<string, List<Action<object>>>(INIT_CAPACITY);
-        private Dictionary<string,AssetLoadStatus> _Asset2LoadStatus = new Dictionary<string, AssetLoadStatus>(INIT_CAPACITY);
+        private Dictionary<string,LoaderStatus> _Asset2LoadStatus = new Dictionary<string, LoaderStatus>(INIT_CAPACITY);
         
         private void _LoadAssetAsync<T>(string path, Action<T> callback) where T : Object
         {
@@ -45,7 +45,7 @@ namespace Party
 
             if (!_Asset2LoadStatus.ContainsKey(path))
             {
-                _Asset2LoadStatus.Add(path, AssetLoadStatus.Loading);
+                _Asset2LoadStatus.Add(path, LoaderStatus.Loading);
             }
             
             var newOpHandle = Addressables.LoadAssetAsync<T>(path);
@@ -55,7 +55,7 @@ namespace Party
                 if (handle.Status == AsyncOperationStatus.Succeeded)
                 {
                     callback?.Invoke(handle.Result);
-                    _Asset2LoadStatus[path] = AssetLoadStatus.Loaded;
+                    _Asset2LoadStatus[path] = LoaderStatus.Loaded;
 
                     if (_Path2PendingCallbacks.ContainsKey(path))
                     {
@@ -70,7 +70,7 @@ namespace Party
                 {
                     Debug.LogError($"Load {path} failed");
                     callback?.Invoke(default);
-                    _Asset2LoadStatus[path] = AssetLoadStatus.Failed;
+                    _Asset2LoadStatus[path] = LoaderStatus.Failed;
                     if (_Path2PendingCallbacks.ContainsKey(path))
                     {
                         foreach (var cb in _Path2PendingCallbacks[path])
@@ -148,12 +148,14 @@ namespace Party
 
         public void ReleaseAsset(string path)
         {
+            Debug.LogError($"try release asset {path}");
             if (_Path2Handle.ContainsKey(path))
             {
                 var handle = (AsyncOperationHandle)_Path2Handle[path];
                 if (handle.IsValid())
                 {
                     handle.Release();
+                    Debug.LogError($"release asset {path} ~~~~");
                 }
                 _Path2Handle.Remove(path);
             }
@@ -179,14 +181,14 @@ namespace Party
             };
         }
 
-        public AssetLoadStatus GetAssetLoadStatus(string path)
+        public LoaderStatus GetAssetLoadStatus(string path)
         {
             if (_Asset2LoadStatus.ContainsKey(path))
             {
                 return _Asset2LoadStatus[path];
             }
             
-            return AssetLoadStatus.None;
+            return LoaderStatus.None;
         }
     }
 }

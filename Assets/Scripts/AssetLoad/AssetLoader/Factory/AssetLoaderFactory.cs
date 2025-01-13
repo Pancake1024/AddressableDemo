@@ -40,21 +40,24 @@ namespace Party
             {
                 return _ImageAssetLoaderPool.Borrow().InitLoader(data.Path, data.Priority, assetManager, data.CallBack);
             }
-            else if (data.LoaderWrapper is RawImageLoaderWrapper)
+            
+            if (data.LoaderWrapper is RawImageLoaderWrapper)
             {
                 return _RawImageAssetLoaderPool.Borrow().InitLoader(data.Path, data.Priority, assetManager, data.CallBack);
-            }else if (data.LoaderWrapper is MeshLoaderWrapper)
+            }
+            
+            if (data.LoaderWrapper is MeshLoaderWrapper)
             {
                 return  _MeshAssetLoaderPool.Borrow().InitLoader(data.Path, data.Priority, assetManager, data.CallBack);
-            }else if (data.LoaderWrapper is GameObjectLoaderWrapper)
+            }
+            
+            if (data.LoaderWrapper is GameObjectLoaderWrapper)
             {
                 return _GameObjectLoaderPool.Borrow().InitLoader(data.Path, data.Priority, assetManager, data.CallBack);
             }
-            else
-            {
-                Debug.LogError($"CreateAssetLoader error:{data.LoaderWrapper.GetType().Name}");
-                return null;
-            }
+            
+            Debug.LogError($"CreateAssetLoader error:{data.LoaderWrapper.GetType().Name}");
+            return null;
         }
 
         public void ReturnLoader(IAssetLoader loader)
@@ -81,19 +84,6 @@ namespace Party
             {
                 Debug.LogError($"ReturnLoader error:{loader.GetType().Name}");
             }
-        }
-
-        
-        //TODO：临时处理，后续依据开发需求修改
-        private string _GenerateAssetPath(string path,string level)
-        {
-            int index = path.LastIndexOf(".", StringComparison.Ordinal);
-            if (index != -1)
-            {
-                path = path.Insert(index, level);
-            }
-
-            return path;
         }
     }
 }

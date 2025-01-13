@@ -16,11 +16,14 @@ namespace Party
         [Header("同时加载的AssetLoader数量")]
         private int PARALLEL_MAX_LOADERS_COUNT = 5;
       
+        [SerializeField]
+        [Header("开启资源按需动态加载功能")]
+        private bool _OpenUpdate = true;
+        
         private IAssetManager _AssetManager;
         private LoaderCacheManager _LoaderCacheManager;
         private List<IAssetLoader> _AssetLoaders;
 
-        private bool _CanUpdate = false;
 
         protected override void Awake()
         {
@@ -44,6 +47,12 @@ namespace Party
         {
             _AssetManager.GetDownloadSizeAsync(path, callBack);
         }
+
+        public void ReleaseAll()
+        {
+            _AssetManager.ReleaseAll();
+            _LoaderCacheManager.Clear();
+        }
         
         public void AddLoaderWrapper(ILoaderWrapper loaderWrapper,Action<Object> callBack)
         {
@@ -52,27 +61,11 @@ namespace Party
         
         public void Update()
         {
-            if (!_TestCode())
-            {
-                return;
-            }
+            if (!_OpenUpdate) return;
             
-            _UpdateAssetLoaders();
+            _UpdateAssetLoaders(Time.deltaTime);
+            _UpdateAutoRelease(Time.deltaTime);
         }
-
-        private bool _TestCode()
-        {
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                _AssetManager.ReleaseAll();
-            }
-            
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _CanUpdate = !_CanUpdate;
-            }
-
-            return _CanUpdate;
-        }
+      
     }
 }

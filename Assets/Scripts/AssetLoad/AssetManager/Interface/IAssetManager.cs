@@ -32,6 +32,6 @@ namespace Party
 
         void GetDownloadSizeAsync(string path, Action<long> callback);
         
-        AssetLoadStatus GetAssetLoadStatus(string path);
+        LoaderStatus GetAssetLoadStatus(string path);
     }
 }

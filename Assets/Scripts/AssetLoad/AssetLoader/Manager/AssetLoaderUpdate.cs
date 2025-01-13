@@ -5,14 +5,14 @@ namespace Party
     /// <summary>
     /// 并行加载的AssetLoader管理
     /// </summary>
-    public partial class AssetLoaderManager : SingletonMonoBehaviour<AssetLoaderManager>
+    public partial class AssetLoaderManager
     {
         [SerializeField]
         [Header("更新AssetLoader列表的间隔时间")]
         private float _UpdateLoaderTime = 0.1f;
         private float _Time;
         
-        private void _UpdateAssetLoaders()
+        private void _UpdateAssetLoaders(float deltaTime)
         {
             _LoaderCacheManager.Update(PARALLEL_MAX_LOADERS_COUNT);
 
@@ -22,7 +22,7 @@ namespace Party
             }
             else
             {
-                _Time += Time.deltaTime;
+                _Time += deltaTime;
                 return;
             }
             
