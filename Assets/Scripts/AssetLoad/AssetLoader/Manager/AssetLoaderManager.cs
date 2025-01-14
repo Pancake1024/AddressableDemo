@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
 
 namespace Party
 {
     /// <summary>
-    /// 提供资源相关的接口，及与资源相关循环逻辑的入口
-    /// 不润许外部直接调用AssetManager的接口
+    /// 外对调用资源加载的唯一入口
     /// </summary>
     public partial class AssetLoaderManager : SingletonMonoBehaviour<AssetLoaderManager>
     {
@@ -21,7 +19,7 @@ namespace Party
         private bool _OpenUpdate = true;
         
         private IAssetManager _AssetManager;
-        private LoaderCacheManager _LoaderCacheManager;
+        private WrapperLoaderCacheManager _WrapperLoaderCacheManager;
         private List<IAssetLoader> _AssetLoaders;
 
 
@@ -30,42 +28,21 @@ namespace Party
             base.Awake();
             
             _AssetManager = new AssetManager();
-            _LoaderCacheManager = new LoaderCacheManager(_AssetManager);
+            _WrapperLoaderCacheManager = new WrapperLoaderCacheManager(_AssetManager);
             _AssetLoaders = new List<IAssetLoader>(PARALLEL_MAX_LOADERS_COUNT);
-        }
-        
-        public void LoadShaderVariants(string path,Action callBack)
-        {
-            _AssetManager.LoadShaderVariants(path, (shadervariants) =>
-            {
-                shadervariants.WarmUp();
-                callBack?.Invoke();
-            });
-        }
-        
-        public void GetDownloadSizeAsync(string path, Action<long> callBack)
-        {
-            _AssetManager.GetDownloadSizeAsync(path, callBack);
-        }
-
-        public void ReleaseAll()
-        {
-            _AssetManager.ReleaseAll();
-            _LoaderCacheManager.Clear();
         }
         
         public void AddLoaderWrapper(ILoaderWrapper loaderWrapper,Action<Object> callBack)
         {
-            _LoaderCacheManager.AddLoaderWrapper(loaderWrapper, callBack);
+            _WrapperLoaderCacheManager.AddLoaderWrapper(loaderWrapper, callBack);
         }
-        
+      
         public void Update()
         {
             if (!_OpenUpdate) return;
             
             _UpdateAssetLoaders(Time.deltaTime);
-            _UpdateAutoRelease(Time.deltaTime);
+            _UpdateAutoReleaseAsset(Time.deltaTime);
         }
-      
     }
 }

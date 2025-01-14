@@ -9,7 +9,7 @@ namespace Party
     /// 缓存需要动态加载的资源相关信息
     /// AssetLoaderManager有能力处理新的资源时，会从此处获取
     /// </summary>
-    public class LoaderCacheManager
+    public class WrapperLoaderCacheManager
     {  
         private const int MAX_LOADERS_COUNT = 10;
         private const int CAPACITY_Asset_COUNT = 64;
@@ -31,7 +31,7 @@ namespace Party
         public AssetLoaderFactory AssetLoaderFactory => _AssetLoaderFactory;
         public Dictionary<string, AssetPath> Path2AssetPath => _Path2AssetPath;
         
-        public LoaderCacheManager(IAssetManager assetManager)
+        public WrapperLoaderCacheManager(IAssetManager assetManager)
         {
             _AssetManager = assetManager;
         }

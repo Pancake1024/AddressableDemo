@@ -15,6 +15,11 @@ namespace Party
         {
             AssetLoaderManager.Instance.AddLoaderWrapper(this, obj =>
             {
+                if (_IsDestory)
+                {
+                    return;
+                }
+                
                 if (MeshFilter != null)
                 {
                     MeshFilter.mesh = obj as Mesh;

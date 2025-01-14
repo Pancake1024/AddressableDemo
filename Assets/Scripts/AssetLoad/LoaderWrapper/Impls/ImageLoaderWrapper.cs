@@ -16,6 +16,11 @@ namespace Party
         {
             AssetLoaderManager.Instance.AddLoaderWrapper(this, obj =>
             {
+                if (_IsDestory)
+                {
+                    return;
+                }
+                
                 if (Image != null)
                 {
                     Image.sprite = obj as Sprite;

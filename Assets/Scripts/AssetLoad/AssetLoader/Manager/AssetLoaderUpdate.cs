@@ -14,7 +14,7 @@ namespace Party
         
         private void _UpdateAssetLoaders(float deltaTime)
         {
-            _LoaderCacheManager.Update(PARALLEL_MAX_LOADERS_COUNT);
+            _WrapperLoaderCacheManager.Update(PARALLEL_MAX_LOADERS_COUNT);
 
             if (_Time > _UpdateLoaderTime)
             {
@@ -27,11 +27,11 @@ namespace Party
             }
             
             int count = PARALLEL_MAX_LOADERS_COUNT - _AssetLoaders.Count;
-            count = count > _LoaderCacheManager.PendingAssetLoader.Count ? _LoaderCacheManager.PendingAssetLoader.Count : count;
+            count = count > _WrapperLoaderCacheManager.PendingAssetLoader.Count ? _WrapperLoaderCacheManager.PendingAssetLoader.Count : count;
             for (int i = 0; i < count; i++)
             {
-                var loader = _LoaderCacheManager.PendingAssetLoader[0];
-                _LoaderCacheManager.PendingAssetLoader.RemoveAt(0);
+                var loader = _WrapperLoaderCacheManager.PendingAssetLoader[0];
+                _WrapperLoaderCacheManager.PendingAssetLoader.RemoveAt(0);
                 _AssetLoaders.Add(loader);
             }
             
@@ -40,10 +40,9 @@ namespace Party
                 var loader = _AssetLoaders[i];
                 if (loader.Update())
                 {
-                    // Debug.LogError($"loader done:{loader.GetType().Name} {loader.Priority}");
                     _AssetLoaders.RemoveAt(i);
                     loader.Release();
-                    _LoaderCacheManager.AssetLoaderFactory.ReturnLoader(loader);
+                    _WrapperLoaderCacheManager.AssetLoaderFactory.ReturnLoader(loader);
                     i--;
                 }
             }

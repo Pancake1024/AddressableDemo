@@ -19,6 +19,13 @@ namespace Party
         {
             AssetLoaderManager.Instance.AddLoaderWrapper(this, obj =>
             {
+                if (_IsDestory)
+                {
+                    Destroy(obj);
+                    OnLoaded?.Invoke(null);
+                    return;
+                }
+                
                 if (_LoadedGameObject != null)
                 {
                     Destroy(_LoadedGameObject);

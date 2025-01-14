@@ -31,6 +31,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0faaa2ddddb86b34aabf01983530981f
+    m_Address: Assets/Raw/Materials/Green.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 13fd0859a9d5a4a43bc437edf31c0fd7
     m_Address: Assets/Raw/Mesh/animal_doublebed_001_LOD2.mesh
     m_ReadOnly: 0
@@ -86,13 +91,33 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8e5f5f14864b464e8e4cf9d3982257f
+    m_Address: Assets/Raw/Materials/Yellow.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d074552d1e2c6e44196b77e1bcf5ad2c
     m_Address: Assets/Raw/UI/RawImage.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d0cc3bb3bc567a34d91abcef0b6e1673
+    m_Address: Assets/Raw/Materials/Effect.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d3d8e241a74f95448b7feeb9f9d5b642
+    m_Address: Assets/Raw/Materials/Red.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d6403c6ce1993a242a82d37d031e2018
     m_Address: Assets/Raw/Mesh/animal_clock_001_LOD.mesh
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d724a6757f9abf5428e2bac6eda5195c
+    m_Address: Assets/Raw/Materials/Blue.mat
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

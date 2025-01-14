@@ -33,5 +33,13 @@ namespace Party
         void GetDownloadSizeAsync(string path, Action<long> callback);
         
         LoaderStatus GetAssetLoadStatus(string path);
+
+        void AddPersistentAsset(string path);
+        
+        void AddPersistentAssets(string[] paths);
+        
+        void RemovePersistentAsset(string path);
+        
+        void RemovePersistentAssets(string[] paths);
     }
 }

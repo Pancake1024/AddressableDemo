@@ -16,6 +16,10 @@ namespace Party
         {
             AssetLoaderManager.Instance.AddLoaderWrapper(this, obj =>
             {
+                if (_IsDestory)
+                {
+                    return;
+                }
                 if (RawImage != null)
                 {
                     RawImage.texture = obj as Texture;

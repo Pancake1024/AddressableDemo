@@ -11,7 +11,9 @@ namespace Party
         protected string _Path;
         [SerializeField]
         protected int _Priority = 3;
-        
+
+        protected bool _IsDestory = false;
+
         private bool _IsInit = false;
         
         public string Path => _Path;
@@ -36,6 +38,11 @@ namespace Party
         private void Awake()
         {
             OnAwake();
+        }
+        
+        private void OnDestroy()
+        {
+            _IsDestory = true;
         }
 
         private void OnEnable()

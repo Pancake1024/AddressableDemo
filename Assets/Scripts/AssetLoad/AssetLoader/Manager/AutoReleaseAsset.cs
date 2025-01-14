@@ -21,7 +21,7 @@ namespace Party
         private List<string> _ReleasePathList = new List<string>(10);
         private List<string> _RemoveList = new List<string>(10);
         
-        private void _UpdateAutoRelease(float deltaTime)
+        private void _UpdateAutoReleaseAsset(float deltaTime)
         {
             if (!_OpenAutoRelease) return;
             
@@ -29,7 +29,7 @@ namespace Party
             if (_AutoReleaseTime < _AssetAutoReleaseInterval) return;
             _AutoReleaseTime = 0;
 
-            foreach (var kv in _LoaderCacheManager.Path2AssetPath)
+            foreach (var kv in _WrapperLoaderCacheManager.Path2AssetPath)
             {
                 var maxLoadStatus = _AssetManager.GetAssetLoadStatus(kv.Value.MaxPath);
                 if (maxLoadStatus == LoaderStatus.Loaded && kv.Value.MaxAssetStatus != AssetStatus.Release)
@@ -122,7 +122,7 @@ namespace Party
             
             foreach (var key in _RemoveList)
             {
-                _LoaderCacheManager.Path2AssetPath.Remove(key);
+                _WrapperLoaderCacheManager.Path2AssetPath.Remove(key);
             }
             _RemoveList.Clear();
         }
