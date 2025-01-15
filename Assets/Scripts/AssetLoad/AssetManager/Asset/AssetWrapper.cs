@@ -77,7 +77,6 @@ namespace Party
             if (_AsyncOperationHandle.IsValid())
             {
                 Addressables.Release(_AsyncOperationHandle);
-                Debug.LogError($"release asset {_Path} ~~~~");
             }
             _Asset = null;
             _LoaderStatus = LoaderStatus.None;

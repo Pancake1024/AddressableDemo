@@ -10,6 +10,7 @@ namespace Party
 
         private void Start()
         {
+            AssetLoaderManager.Instance.AddPersistentAsset("Assets/Raw/SVC.shadervariants");
             AssetLoaderManager.Instance.LoadShaderVariants("Assets/Raw/SVC.shadervariants", svc =>
             {
                 svc.WarmUp();

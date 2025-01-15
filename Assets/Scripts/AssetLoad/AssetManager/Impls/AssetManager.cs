@@ -19,6 +19,7 @@ namespace Party
         
         private Dictionary<string,IAssetWrapper> _Path2AssetWrapper = new Dictionary<string, IAssetWrapper>(INIT_CAPACITY);
         private List<string> _PersistentAssets = new List<string>(INIT_PERSISTENT_ASSET_COUNT);
+        private HashSet<string> _ReleaseHashSet = new HashSet<string>();
         
         private void _LoadAssetAsync<T>(string path, Action<T> callback) where T : Object
         {
@@ -98,7 +99,6 @@ namespace Party
 
         public void ReleaseAsset(string path)
         {
-            Debug.LogError($"try release asset {path}");
             if (_PersistentAssets.Contains(path))
             {
                 return;
@@ -115,12 +115,19 @@ namespace Party
         {
             foreach (var kv in _Path2AssetWrapper)
             {
-                if (_Path2AssetWrapper.ContainsKey(kv.Key))
+                if (_PersistentAssets.Contains(kv.Key))
                 {
                     continue;
                 }
                 kv.Value.Release();
+                _ReleaseHashSet.Add(kv.Key);
             }
+
+            foreach (var key in _ReleaseHashSet)
+            {
+                _PersistentAssets.Remove(key);
+            }
+            _ReleaseHashSet.Clear();
         }
 
         public void GetDownloadSizeAsync(string path, Action<long> callback)
