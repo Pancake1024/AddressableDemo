@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PARALLEL_MAX_LOADERS_COUNT: 1
-  _OpenUpdate: 0
+  _OpenUpdate: 1
   _UpdateLoaderTime: 0.2
   _AssetAutoReleaseInterval: 2
   _OpenAutoRelease: 1
@@ -1056,6 +1056,7 @@ GameObject:
   m_Component:
   - component: {fileID: 222875562}
   - component: {fileID: 222875563}
+  - component: {fileID: 222875564}
   m_Layer: 0
   m_Name: SVCPreload
   m_TagString: Untagged
@@ -1093,6 +1094,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Objs:
   - {fileID: 1549006382}
+--- !u!114 &222875564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222875560}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f591829f32ab42b0b6ebaae9d3c36c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Addresses:
+  - Assets/Raw/UI/image2.png
 --- !u!1 &243211969 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 938418049062608206, guid: fc738563c43f73448a7ff22614d1cd92, type: 3}

@@ -18,8 +18,8 @@ namespace Party
         private bool _OpenAutoRelease = true;
 
         private float _AutoReleaseTime;
-        private List<string> _ReleasePathList = new List<string>(10);
-        private List<string> _RemoveList = new List<string>(10);
+        private HashSet<string> _ReleasePathList = new HashSet<string>(10);
+        private HashSet<string> _RemoveList = new HashSet<string>(10);
         
         private void _UpdateAutoReleaseAsset(float deltaTime)
         {

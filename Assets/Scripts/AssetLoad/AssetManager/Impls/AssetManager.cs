@@ -14,9 +14,11 @@ namespace Party
     /// </summary>
     public class AssetManager : IAssetManager
     {
+        private const int INIT_PERSISTENT_ASSET_COUNT = 32;
         private const int INIT_CAPACITY = 128;
         
         private Dictionary<string,IAssetWrapper> _Path2AssetWrapper = new Dictionary<string, IAssetWrapper>(INIT_CAPACITY);
+        private List<string> _PersistentAssets = new List<string>(INIT_PERSISTENT_ASSET_COUNT);
         
         private void _LoadAssetAsync<T>(string path, Action<T> callback) where T : Object
         {
@@ -97,6 +99,11 @@ namespace Party
         public void ReleaseAsset(string path)
         {
             Debug.LogError($"try release asset {path}");
+            if (_PersistentAssets.Contains(path))
+            {
+                return;
+            }
+            
             if (_Path2AssetWrapper.TryGetValue(path, out IAssetWrapper assetWrapper))
             {
                 assetWrapper.Release();
@@ -108,6 +115,10 @@ namespace Party
         {
             foreach (var kv in _Path2AssetWrapper)
             {
+                if (_Path2AssetWrapper.ContainsKey(kv.Key))
+                {
+                    continue;
+                }
                 kv.Value.Release();
             }
         }
@@ -133,22 +144,25 @@ namespace Party
 
         public void AddPersistentAsset(string path)
         {
-            
+            _PersistentAssets.Add(path);
         }
 
         public void AddPersistentAssets(string[] paths)
         {
-            
+            _PersistentAssets.AddRange(paths);
         }
 
         public void RemovePersistentAsset(string path)
         {
-            
+            _PersistentAssets.Remove(path);
         }
 
         public void RemovePersistentAssets(string[] paths)
         {
-            
+            foreach (var path in paths)
+            {
+                _PersistentAssets.Remove(path);
+            }
         }
     }
 }
